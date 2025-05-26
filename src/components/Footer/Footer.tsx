@@ -1,21 +1,17 @@
 'use client';
 
 import Image from 'next/image';
+
+import { toast } from 'sonner'; // ✅ Add this import
+
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 
 export default function Footer() {
   return (
+
     <footer className="bg-white text-black pt-0">
       {/* Full-width image at top without spacing */}
-      <div className="w-full">
-        <Image
-          src="/images/ABOUT.jpg" // Your image path
-          alt="Footer Banner"
-          width={1920}
-          height={300}
-          className="w-full object-cover"
-        />
-      </div>
+  
 
       {/* Footer content without top padding */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 py-10 px-6">
@@ -26,6 +22,7 @@ export default function Footer() {
           <p className="text-sm opacity-70">
             Innovative solutions for parking, tracking, and smart systems.
           </p>
+
         </div>
 
         {/* Quick Links */}
@@ -56,6 +53,7 @@ export default function Footer() {
         </div>
 
         {/* Social Icons */}
+
         <div>
           <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
           <div className="flex gap-4 text-orange-500 text-xl">
@@ -69,13 +67,27 @@ export default function Footer() {
               <FaLinkedinIn />
             </a>
           </div>
+
+
+          {/* Download Button */}
+          <div className="mt-7">
+            <a
+              href="/EPITAILO BROCHURE.pdf"
+              download
+              onClick={() => toast.success('📥 Brochure download started!')}
+              className="inline-block bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-md"
+            >
+              📄 Download Brochure
+            </a>
+          </div>
         </div>
       </div>
 
-      <div className="text-center text-xs text-gray-500 border-t border-gray-800 py-4">
-        &copy; {new Date().getFullYear()} Epitailo. All rights reserved.
+      {/* Footer Bottom */}
+      <div className="text-center text-xs text-gray-500 border-t border-orange-200 py-4">
+        &copy; {new Date().getFullYear()} Epitailo&trade; | All rights reserved.
       </div>
-      
+
     </footer>
   );
 }

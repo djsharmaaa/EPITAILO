@@ -80,4 +80,5 @@ export const blogs: BlogItem[] = [
         "With Epitailo, choosing the right tile adhesive becomes simple. Fix it. Forget it. Choose Epitailo."
     }
   }
+
 ];

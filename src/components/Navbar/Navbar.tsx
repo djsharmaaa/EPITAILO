@@ -1,10 +1,10 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-// import { Link } from 'lucide-react';
-  import Link from 'next/link';
 
+  import Link from 'next/link';
 
 
 export default function Navbar() {
@@ -32,6 +32,7 @@ export default function Navbar() {
   return (
     <>
       <nav
+
         className={`fixed  left-0 w-full flex justify-between items-center p-4 z-50 transition-all duration-300 ${
           scrolled ? 'bg-white shadow-md' : 'bg-none'
         }`}
