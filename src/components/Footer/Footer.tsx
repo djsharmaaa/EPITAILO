@@ -14,7 +14,7 @@ export default function Footer() {
   
 
       {/* Footer content without top padding */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 py-10 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 py-10 px-6">
         
         {/* Logo + Description */}
         <div>
@@ -44,7 +44,7 @@ The Strenght of any masterpiece lies in the bonds you dont see.
         </div>
 
         {/* Newsletter */}
-        <div>
+        {/* <div>
           <h3 className="text-lg font-semibold mb-3">Subscribe</h3>
           <p className="text-sm mb-2 opacity-70">Stay updated with our latest tech</p>
           <div className="flex items-center border-b border-gray-700">
@@ -57,7 +57,7 @@ The Strenght of any masterpiece lies in the bonds you dont see.
               Subscribe
             </button>
           </div>
-        </div>
+        </div> */}
 
         {/* Social Icons */}
 
