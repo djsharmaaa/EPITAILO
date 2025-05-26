@@ -142,6 +142,12 @@ const dialogVariants = {
   exit: { opacity: 0, scale: 0.95, transition: { duration: 0.2 } },
 };
 
+const descriptionVariants = {
+  initial: { opacity: 0, scale: 0.95, y: 50 },
+  animate: { opacity: 1, scale: 1, y: 0 },
+  exit: { opacity: 0, scale: 0.95, y: 50 },
+};
+
 export default function ProductGrid() {
   return (
     <section className="py-16 px-6 md:px-20 bg-gray-200">
@@ -178,72 +184,73 @@ export default function ProductGrid() {
                 </MorphingDialogTrigger>
 
                 <MorphingDialogContainer>
-                  <MorphingDialogContent
+                  <motion.div
                     style={{ borderRadius: '24px' }}
                     className={`relative flex flex-col overflow-hidden border-2 shadow-xl sm:w-[480px] max-w-full max-h-[calc(100vh-4rem)] bg-gradient-to-b from-white via-${product.color.base}-50 to-white`}
-                    as={motion.div}
                     variants={dialogVariants}
                     initial="hidden"
                     animate="visible"
                     exit="exit"
                   >
-                    <MorphingDialogImage
-                      src={product.image}
-                      alt={product.title}
-                      className="w-full h-[280px] object-contain bg-white p-6"
-                    />
-                    <div className="p-6 space-y-3 bg-white rounded-b-2xl flex flex-col">
-                      <MorphingDialogTitle
-                        className={`text-2xl font-bold border-b-2 pb-2 ${product.color.border} ${product.color.text}`}
-                      >
-                        {product.title}
-                      </MorphingDialogTitle>
+                    <MorphingDialogContent>
+                      <MorphingDialogImage
+                        src={product.image}
+                        alt={product.title}
+                        className="w-full h-[280px] object-contain bg-white p-6"
+                      />
+                      <div className="p-6 space-y-3 bg-white rounded-b-2xl flex flex-col">
+                        <MorphingDialogTitle
+                          className={`text-2xl font-bold border-b-2 pb-2 ${product.color.border} ${product.color.text}`}
+                        >
+                          {product.title}
+                        </MorphingDialogTitle>
 
-                      <MorphingDialogSubtitle className="text-md italic text-zinc-600">
-                        {product.subtitle}
-                      </MorphingDialogSubtitle>
+                        <MorphingDialogSubtitle className="text-md italic text-zinc-600">
+                          {product.subtitle}
+                        </MorphingDialogSubtitle>
 
-                      <MorphingDialogDescription
-                        disableLayoutAnimation
-                        variants={{
-                          initial: { opacity: 0, scale: 0.95, y: 50 },
-                          animate: { opacity: 1, scale: 1, y: 0 },
-                          exit: { opacity: 0, scale: 0.95, y: 50 },
-                        }}
-                        className="text-sm flex-grow overflow-hidden"
-                        as={motion.div}
-                      >
-                        <div>
-                          <h4
-                            className={`font-semibold mb-2 pb-1 border-b-2 inline-block w-fit ${product.color.border}`}
-                          >
-                            Features:
-                          </h4>
-
-                          <ul className="list-disc pl-6 space-y-1 leading-tight max-h-32 overflow-hidden">
-                            {product.features.slice(0, 5).map((f, i) => (
-                              <li key={i}>{f}</li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className={`mt-4 grid grid-cols-3 gap-3 font-semibold ${product.color.text}`}>
-                          {['Water Demand', 'Pot Life', 'Coverage'].map((label, i) => {
-                            const value = [product.water, product.potLife, product.coverage][i];
-                            return (
-                              <div
-                                key={label}
-                                className={`bg-gradient-to-tr ${product.color.from} ${product.color.to} rounded-xl p-3 text-center shadow-md cursor-default`}
+                        {/* Animate this div wrapping the Description */}
+                        <motion.div
+                          variants={descriptionVariants}
+                          initial="initial"
+                          animate="animate"
+                          exit="exit"
+                          className="text-sm flex-grow overflow-hidden"
+                        >
+                          <MorphingDialogDescription disableLayoutAnimation>
+                            <div>
+                              <h4
+                                className={`font-semibold mb-2 pb-1 border-b-2 inline-block w-fit ${product.color.border}`}
                               >
-                                <p className={`mb-1 text-xs ${product.color.text}`}>{label}</p>
-                                <p className={`text-sm font-bold truncate ${product.color.text}`}>{value}</p>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </MorphingDialogDescription>
-                    </div>
-                  </MorphingDialogContent>
+                                Features:
+                              </h4>
+
+                              <ul className="list-disc pl-6 space-y-1 leading-tight max-h-32 overflow-hidden">
+                                {product.features.slice(0, 5).map((f, i) => (
+                                  <li key={i}>{f}</li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className={`mt-4 grid grid-cols-3 gap-3 font-semibold ${product.color.text}`}>
+                              {['Water Demand', 'Pot Life', 'Coverage'].map((label, i) => {
+                                const value = [product.water, product.potLife, product.coverage][i];
+                                return (
+                                  <div
+                                    key={label}
+                                    className={`bg-gradient-to-tr ${product.color.from} ${product.color.to} rounded-xl p-3 text-center shadow-md cursor-default`}
+                                  >
+                                    <p className={`mb-1 text-xs ${product.color.text}`}>{label}</p>
+                                    <p className={`text-sm font-bold truncate ${product.color.text}`}>{value}</p>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </MorphingDialogDescription>
+                        </motion.div>
+                      </div>
+                    </MorphingDialogContent>
+                  </motion.div>
                 </MorphingDialogContainer>
               </MorphingDialog>
             </motion.div>
