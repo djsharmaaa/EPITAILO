@@ -4,11 +4,12 @@
 import { toast } from 'sonner'; // ✅ Add this import
 
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
 
-    <footer className="bg-white text-black pt-0">
+    <footer className="bg-gray-200 text-black pt-0">
       {/* Full-width image at top without spacing */}
   
 
@@ -17,9 +18,16 @@ export default function Footer() {
         
         {/* Logo + Description */}
         <div>
-          <h2 className="text-2xl font-bold mb-2 text-orange-400">Epitailo</h2>
-          <p className="text-sm opacity-70">
-            Innovative solutions for parking, tracking, and smart systems.
+          {/* <h2 className="text-2xl font-bold mb-2 text-orange-400">Epitailo</h2> */}
+           <Image
+                src="/images/EpitailoLogo.png"
+                alt="Epitailo Logo"
+                width={100}
+                height={30}
+              />
+          <p className="text-sm opacity-80 mt-2">
+           
+The Strenght of any masterpiece lies in the bonds you dont see.
           </p>
 
         </div>
@@ -30,7 +38,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li><a href="#" className="hover:text-orange-400">Home</a></li>
             <li><a href="#" className="hover:text-orange-400">About</a></li>
-            <li><a href="#" className="hover:text-orange-400">Services</a></li>
+            <li><a href="#" className="hover:text-orange-400">Products</a></li>
             <li><a href="#" className="hover:text-orange-400">Contact</a></li>
           </ul>
         </div>
