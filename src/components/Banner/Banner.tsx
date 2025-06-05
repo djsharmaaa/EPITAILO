@@ -94,24 +94,21 @@ export default function Banner() {
       </div>
 
       {/* Social Links Bottom Left */}
-      <div className="absolute bottom-6 left-6 z-20 flex gap-6 sm:gap-6 text-sm">
-        <a
-          href="https://www.facebook.com/epitailo.tileadhesive"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline cursor-pointer"
-        >
-          FACEBOOK
-        </a>
-        <a
-          href="https://www.instagram.com/epitailo.tileadhesive?igsh=NzByc21pd2t0dmxt"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline cursor-pointer"
-        >
-          INSTAGRAM
-        </a>
-      </div>
+<div className="absolute bottom-6 left-6 z-20 flex gap-6 sm:gap-6 text-sm">
+  <span
+    onClick={() => window.open("https://www.facebook.com/epitailo.tileadhesive", "_blank")}
+    className="hover:underline cursor-pointer"
+  >
+    FACEBOOK
+  </span>
+  <span
+    onClick={() => window.open("https://www.instagram.com/epitailo.tileadhesive?igsh=NzByc21pd2t0dmxt", "_blank")}
+    className="hover:underline cursor-pointer"
+  >
+    INSTAGRAM
+  </span>
+</div>
+
 
       {/* Animations */}
       <style jsx>{`
