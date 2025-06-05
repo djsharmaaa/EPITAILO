@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { ArrowRight, Volume2, VolumeX } from "lucide-react";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
-import { db } from "@/lib/firebase"; // Make sure your firebase client is correctly exported here
+import { db } from "@/lib/firebase";
 
 interface Video {
   id: string;
@@ -87,39 +87,41 @@ export default function ReelPage() {
     }
   };
 
-  const handleVideoMouseEnter = (id: string) => {
-    const video = videoRefs.current[id];
+  const handleVideoMouseEnter = (key: string) => {
+    const video = videoRefs.current[key];
     if (video) {
       video.play().catch((err) => console.warn("Autoplay failed:", err));
       setVideoStates((prev) => ({
         ...prev,
-        [id]: { ...prev[id], paused: false },
+        [key]: { ...prev[key], paused: false },
       }));
     }
   };
 
-  const handleVideoMouseLeave = (id: string) => {
-    const video = videoRefs.current[id];
+  const handleVideoMouseLeave = (key: string) => {
+    const video = videoRefs.current[key];
     if (video) {
       video.pause();
       video.currentTime = 0;
       setVideoStates((prev) => ({
         ...prev,
-        [id]: { ...prev[id], paused: true },
+        [key]: { ...prev[key], paused: true },
       }));
     }
   };
 
-  const toggleMute = (id: string) => {
-    const video = videoRefs.current[id];
+  const toggleMute = (key: string) => {
+    const video = videoRefs.current[key];
     if (video) {
       video.muted = !video.muted;
       setVideoStates((prev) => ({
         ...prev,
-        [id]: { ...prev[id], muted: video.muted },
+        [key]: { ...prev[key], muted: video.muted },
       }));
     }
   };
+
+  const loopedList = [...videoList, ...videoList, ...videoList];
 
   if (loading) {
     return (
@@ -169,48 +171,60 @@ export default function ReelPage() {
         <div className="relative">
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto scroll-smooth no-scrollbar gap-4 px-2 touch-pan-x"
+            className="flex overflow-x-auto scroll-smooth gap-4 px-2 touch-pan-x"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
           >
-            {videoList.map((item) => (
-              <div
-                key={item.id}
-                className="w-64 flex-shrink-0 rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="aspect-[9/16] bg-black relative group">
-                  <video
-                    ref={(el) => {
-                      videoRefs.current[item.id] = el;
-                    }}
-                    src={item.url}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    loop
-                    muted={videoStates[item.id]?.muted}
-                    playsInline
-                    onMouseEnter={() => handleVideoMouseEnter(item.id)}
-                    onMouseLeave={() => handleVideoMouseLeave(item.id)}
-                  />
+            <style jsx>{`
+              div::-webkit-scrollbar {
+                display: none;
+              }
+            `}</style>
 
-                  <div className="absolute bottom-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button
-                      type="button"
-                      className="bg-black/50 text-white p-1.5 rounded-full"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleMute(item.id);
+            {loopedList.map((item, index) => {
+              const key = `${item.id}-${index}`;
+              return (
+                <div
+                  key={key}
+                  className="w-64 flex-shrink-0 rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="aspect-[9/16] bg-black relative group">
+                    <video
+                      ref={(el) => {
+                        videoRefs.current[key] = el;
                       }}
-                    >
-                      {videoStates[item.id]?.muted ? (
-                        <VolumeX className="w-4 h-4" />
-                      ) : (
-                        <Volume2 className="w-4 h-4" />
-                      )}
-                    </button>
+                      src={item.url}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                      loop
+                      muted={videoStates[key]?.muted ?? true}
+                      playsInline
+                      onMouseEnter={() => handleVideoMouseEnter(key)}
+                      onMouseLeave={() => handleVideoMouseLeave(key)}
+                    />
+                    <div className="absolute bottom-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button
+                        type="button"
+                        className="bg-black/50 text-white p-1.5 rounded-full"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleMute(key);
+                        }}
+                      >
+                        {videoStates[key]?.muted ? (
+                          <VolumeX className="w-4 h-4" />
+                        ) : (
+                          <Volume2 className="w-4 h-4" />
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

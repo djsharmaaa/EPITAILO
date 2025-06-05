@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-import { Input } from '../ui/input';
-import { Textarea } from '../ui/textarea';
+// import { Input } from '../ui/input';
+// import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import { toast } from 'sonner';
@@ -32,14 +32,14 @@ const Footer: React.FC = () => {
       return;
     }
 
-    const companyWhatsappNumber = '917600001884'; // removed the + sign
+    const companyWhatsappNumber = '919601503959'; // removed the + sign
     const enquiryMessage = `
-📩 *New Enquiry Received*
-👤 Name: ${fullName}
-📧 Email: ${email}
-📱 Phone: ${phone}
-📌 Subject: ${subject}
-📝 Message: ${message}
+ New Enquiry Received*
+ Name: ${fullName}
+ Email: ${email}
+ Phone: ${phone}
+ Subject: ${subject}
+ Message: ${message}
     `.trim();
 
     const whatsappURL = `https://wa.me/${companyWhatsappNumber}?text=${encodeURIComponent(
@@ -103,65 +103,78 @@ const Footer: React.FC = () => {
           className="mx-auto max-w-3xl bg-white dark:bg-gray-900 text-black dark:text-white border border-gray-300 dark:border-gray-800 ring-1 ring-gray-200 dark:ring-black rounded-xl md:rounded-3xl shadow-xl p-6 md:p-14"
         >
           {/* Form Content */}
-          <div className="grid grid-cols-1 gap-4 md:gap-6 mt-0">
-            <h2 className="text-center text-2xl md:text-4xl font-extrabold text-gray-800 dark:text-white px-4">
-              What can we do for you?
-            </h2>
-            <p className="text-center text-base md:text-lg text-gray-600 dark:text-gray-300 mt-2 px-4">
-              Fill out the form and we&apos;ll get back to you soon.
-            </p>
-            {[
-              { name: 'fullName', placeholder: 'Full Name', type: 'text' },
-              { name: 'email', placeholder: 'Email Address', type: 'email' },
-              { name: 'phone', placeholder: 'Phone Number', type: 'tel' },
-              { name: 'subject', placeholder: 'Subject', type: 'text' },
-            ].map(({ name, placeholder, type }) => (
-              <div key={name} className="relative">
-                <Input
-                  id={name} // add id for label association
-                  name={name}
-                  type={type}
-                  value={formData[name as keyof typeof formData]}
-                  onChange={handleChange}
-                  placeholder=" "
-                  className="peer h-12 md:h-14 px-4 pt-4 md:pt-5 pb-1 md:pb-2 text-gray-800 dark:text-white placeholder-transparent rounded-lg md:rounded-xl border border-gray-300 dark:border-gray-700 focus:border-[#898989] focus:ring-2 focus:ring-[#898989]/20 dark:focus:ring-[#898989]/50 transition-all w-full"
-                />
-                <label
-                  htmlFor={name}
-                  className="absolute left-4 top-1 md:top-2 text-xs md:text-sm text-gray-600 dark:text-gray-400 peer-placeholder-shown:top-3 md:peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm md:peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-placeholder-shown:text-gray-500 transition-all"
-                >
-                  {placeholder}
-                </label>
-              </div>
-            ))}
+      <div className="grid grid-cols-1 gap-4 md:gap-6 mt-0">
+  <h2 className="text-center text-2xl md:text-4xl font-extrabold text-gray-800 dark:text-white px-4">
+    What can we do for you?
+  </h2>
+  <p className="text-center text-base md:text-lg text-gray-600 dark:text-gray-300 mt-2 px-4">
+    Fill out the form and we&apos;ll get back to you soon.
+  </p>
+ {[
+  { name: 'fullName', placeholder: 'Full Name', type: 'text' },
+  { name: 'email', placeholder: 'Email Address', type: 'email' },
+  { name: 'phone', placeholder: 'Phone Number', type: 'tel' },
+  { name: 'subject', placeholder: 'Subject', type: 'text' },
+].map(({ name, placeholder, type }) => (
+  <div key={name} className="relative">
+    <input // changed from <Input />
+      id={name}
+      name={name}
+      type={type}
+      value={formData[name as keyof typeof formData]}
+      onChange={handleChange}
+      placeholder=" "
+      required
+      className="peer h-12 md:h-14 px-4 pt-5 pb-1 text-gray-800 dark:text-white placeholder-transparent bg-white dark:bg-zinc-900 rounded-lg md:rounded-xl border border-gray-300 dark:border-gray-700 focus:border-[#898989] focus:ring-2 focus:ring-[#898989]/20 dark:focus:ring-[#898989]/50 transition-all w-full"
+    />
+    <label
+      htmlFor={name}
+      className="absolute left-4 top-2 text-sm text-gray-600 dark:text-gray-400 transition-all duration-200
+        peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-placeholder-shown:text-gray-500
+        peer-focus:top-2 peer-focus:text-sm peer-focus:text-gray-600 dark:peer-focus:text-gray-400
+        peer-valid:top-2 peer-valid:text-sm peer-valid:text-gray-600 dark:peer-valid:text-gray-400
+        pointer-events-none"
+    >
+      {placeholder}
+    </label>
+  </div>
+))}
 
-            <div className="relative">
-              <Textarea
-                id="message" // add id for label association
-                name="message"
-                rows={4}
-                value={formData.message}
-                onChange={handleChange}
-                placeholder=" "
-                className="peer px-4 pt-4 md:pt-5 pb-1 md:pb-2 text-gray-800 dark:text-white placeholder-transparent rounded-lg md:rounded-xl border border-gray-300 dark:border-gray-700 focus:border-[#898989] focus:ring-2 focus:ring-[#898989]/20 dark:focus:ring-[#898989]/50 transition-all w-full"
-              />
-              <label
-                htmlFor="message"
-                className="absolute left-4 top-1 md:top-2 text-xs md:text-sm text-gray-600 dark:text-gray-400 peer-placeholder-shown:top-3 md:peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm md:peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-placeholder-shown:text-gray-500 transition-all"
-              >
-                Your Message
-              </label>
-            </div>
+<div className="relative">
+  <textarea
+    id="message"
+    name="message"
+    rows={4}
+    value={formData.message}
+    onChange={handleChange}
+    placeholder=" "
+    required
+    className="peer w-full px-4 pt-5 pb-2 text-gray-800 dark:text-white placeholder-transparent bg-white dark:bg-zinc-900 rounded-lg md:rounded-xl border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#898989]/30 focus:border-[#898989] transition-all"
+  />
+  <label
+    htmlFor="message"
+    className="absolute left-4 top-2 text-sm text-gray-600 dark:text-gray-400 transition-all duration-200
+      peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 dark:peer-placeholder-shown:text-gray-500
+      peer-focus:top-2 peer-focus:text-sm peer-focus:text-gray-600 dark:peer-focus:text-gray-400
+      peer-valid:top-2 peer-valid:text-sm peer-valid:text-gray-600 dark:peer-valid:text-gray-400
+      pointer-events-none"
+  >
+    Your Message
+  </label>
+</div>
 
-            <Button
-              type="button" // avoid form submit on enter
-              onClick={handleSend}
-              className="w-full h-12 md:h-14 text-base md:text-lg font-semibold bg-[#898989] hover:bg-[#4D4D4D] focus:outline-none focus:ring-4 focus:ring-[#898989]/30 text-white rounded-lg md:rounded-xl transition-all flex items-center justify-center gap-2"
-            >
-              <FaWhatsapp className="text-lg" />
-              Send
-            </Button>
-          </div>
+
+  <Button
+    type="button"
+    onClick={handleSend}
+    className="w-full h-12 md:h-14 text-base md:text-lg font-semibold bg-[#898989] hover:bg-[#4D4D4D] focus:outline-none focus:ring-4 focus:ring-[#898989]/30 text-white rounded-lg md:rounded-xl transition-all flex items-center justify-center gap-2"
+  >
+    <FaWhatsapp className="text-lg" />
+    Send
+  </Button>
+</div>
+
+
         </motion.div>
       </div>
 
@@ -248,25 +261,21 @@ const Footer: React.FC = () => {
           <div className="space-y-6 flex flex-col items-start">
             <h3 className="text-xl md:text-2xl font-semibold">Connect with us</h3>
             <div className="flex space-x-4 text-white text-lg">
-              <a
-                href="https://www.facebook.com/epitailo.tileadhesive"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="hover:text-gray-300 transition-colors"
-              >
-                <FaFacebookF />
-              </a>
-              <a
-                href="https://www.instagram.com/epitailo.tileadhesive"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="hover:text-gray-300 transition-colors"
-              >
-                <FaInstagram />
-              </a>
-            </div>
+      <span
+        onClick={() => window.open("https://www.facebook.com/epitailo.tileadhesive", "_blank")}
+        aria-label="Facebook"
+        className="cursor-pointer hover:text-gray-300 transition-colors"
+      >
+        <FaFacebookF />
+      </span>
+      <span
+        onClick={() => window.open("https://www.instagram.com/epitailo.tileadhesive", "_blank")}
+        aria-label="Instagram"
+        className="cursor-pointer hover:text-gray-300 transition-colors"
+      >
+        <FaInstagram />
+      </span>
+    </div>
             <Button
               type="button"
               onClick={handleClick}

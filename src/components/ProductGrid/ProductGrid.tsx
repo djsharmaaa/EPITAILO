@@ -41,7 +41,7 @@ const ProductGrid = () => {
   const products: Product[] = [
     {
       title: 'ET1 - SMALL SIZED FLOOR TILE ADHESIVE',
-        price: '₹999',
+        price: '₹399',
       image:
         'https://res.cloudinary.com/ddztecdya/image/upload/v1748934013/Epitailo/yott6jard5m5ph6x5evs.png',
       imagestep:
@@ -63,7 +63,7 @@ const ProductGrid = () => {
     },
     {
       title: 'ET2 - MEDIUM SIZED WALL TILE ADHESIVE',
-        price: '₹999',
+        price: '₹499',
       image:
         'https://res.cloudinary.com/ddztecdya/image/upload/v1748934014/Epitailo/lysukiep8yno3ehgloha.png',
       imagestep:
@@ -85,7 +85,7 @@ const ProductGrid = () => {
     },
     {
       title: 'ET3 - 4X8 WALL TILES & LARGE FORMAT TILE ADHESIVE',
-        price: '₹999',
+        price: '₹599',
       image:
         'https://res.cloudinary.com/ddztecdya/image/upload/v1748934014/Epitailo/vqk50wdd86wddvmtxda2.png',
       imagestep:
@@ -107,7 +107,7 @@ const ProductGrid = () => {
     },
     {
       title: 'ET4 - HEAVY DUTY STONE ADHESIVE',
-        price: '₹999',
+        price: '₹699',
       image:
         'https://res.cloudinary.com/ddztecdya/image/upload/v1748934015/Epitailo/o9fmunedkhtz0r6gwwbx.png',
       imagestep:
@@ -129,7 +129,7 @@ const ProductGrid = () => {
     },
     {
       title: 'BLOCK JOINTING MORTAR',
-        price: '₹999',
+        price: '₹599',
       image:
         'https://res.cloudinary.com/ddztecdya/image/upload/v1748934254/Epitailo/rakmveojobpeiohy50z1.png',
       imagestep:
@@ -159,7 +159,7 @@ const ProductGrid = () => {
     },
     {
       title: 'SP-5000 PREMIUM EPOXY TILE GROUT',
-        price: '₹999',
+
       image:
         'https://res.cloudinary.com/ddztecdya/image/upload/v1748934012/Epitailo/yj5xqyiha80ucv1ea1yj.png',
       features: [
