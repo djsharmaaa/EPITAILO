@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Toaster } from 'sonner';
 import Banner from '../components/Banner/Banner';
 import ProductGrid from '@/components/ProductGrid/ProductGrid';
@@ -12,12 +12,24 @@ import Reel from '@/components/Reel/Reel';
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
+
+  useEffect(() => {
+    const hasLoaded = sessionStorage.getItem('loaderShown');
+
+    if (!hasLoaded) {
+      setShowLoader(true);
+      sessionStorage.setItem('loaderShown', 'true');
+    } else {
+      setLoading(false); 
+    }
+  }, []);
 
   return (
     <>
       <Toaster richColors position="top-center" />
 
-      {loading && <Loader onFinish={() => setLoading(false)} />}
+      {showLoader && loading && <Loader onFinish={() => setLoading(false)} />}
 
       {!loading && (
         <main>
@@ -26,7 +38,6 @@ export default function HomePage() {
             <div className="hidden sm:block absolute bottom-0 left-3/4 md:left-[90%] transform -translate-x-1/2 translate-y-1/2 z-20">
               <FixItBadge />
             </div>
-
           </section>
 
           <section id="products">
@@ -37,8 +48,10 @@ export default function HomePage() {
             <About />
           </section>
 
-
-          <section id="blogs" className='max-w-6xl mx-auto px-4 pb-16 md:pb-24 lg:pb-32'>
+          <section
+            id="blogs"
+            className="max-w-6xl mx-auto px-4 pb-16 md:pb-24 lg:pb-32"
+          >
             <Blogs />
           </section>
 
