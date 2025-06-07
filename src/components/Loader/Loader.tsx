@@ -11,6 +11,14 @@ export default function Loader({ onFinish }: LoaderProps) {
   const [stage, setStage] = useState(0);
 
   useEffect(() => {
+    // prevent re-running in Strict Mode dev
+    if (sessionStorage.getItem('loaderHandled')) {
+      onFinish();
+      return;
+    }
+
+    sessionStorage.setItem('loaderHandled', 'true');
+
     const timers: NodeJS.Timeout[] = [];
 
     timers.push(setTimeout(() => setStage(1), 300));   // pop in
@@ -26,8 +34,7 @@ export default function Loader({ onFinish }: LoaderProps) {
   return (
     <div className="fixed inset-0 bg-white flex items-center justify-center z-50 overflow-hidden">
       <div
-        className={`
-          transition-transform ease-in-out duration-700
+        className={`transition-transform ease-in-out duration-700
           ${stage === 0 ? 'scale-0 opacity-0' : ''}
           ${stage === 1 ? 'scale-100 opacity-100' : ''}
           ${stage === 2 ? 'scale-100 opacity-100' : ''}
