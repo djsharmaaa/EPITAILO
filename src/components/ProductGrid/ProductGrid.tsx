@@ -562,7 +562,7 @@ const ProductGrid = () => {
   return (
     <>
       <div className="overflow-x-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 py-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-18 gap-y-12 px-4 py-8 max-w-4xl mx-auto">
           {products.map((product, i) => (
             <div
               key={i}
